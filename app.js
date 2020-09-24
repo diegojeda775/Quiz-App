@@ -1,36 +1,4 @@
 /**
- * Example store structure
- */
-const store = {
-  // 5 or more questions are required
-  questions: [
-    {
-      question: 'What color is broccoli?',
-      answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
-      ],
-      correctAnswer: 'green'
-    },
-    {
-      question: 'What is the current year?',
-      answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
-      ],
-      correctAnswer: '2019'
-    }
-  ],
-  quizStarted: false,
-  questionNumber: 0,
-  score: 0
-};
-
-/**
  * 
  * Technical requirements:
  * 
@@ -48,11 +16,185 @@ const store = {
 /********** TEMPLATE GENERATION FUNCTIONS **********/
 
 // These functions return HTML templates
+function startPageGen() {
+    return `
+    <div class='group'>
+    <div class="start-page">
+        <h2> Welcome to the peruvian test where your knowlege about Peru will be tested.</h2>
+        <br>
+        <button type="button" id="start">Start Quiz</button>
+    </div>
+    </div>
+    `;
+};
+/**
+ * Generates the HTML for the section of the app 
+ * that displays the question number and the score
+ */
+function generatingQuestion() {
+    let question = '';
+    let index = store.questionNumber;
+    
+    question = store.questions[index].question;
+    
+    return `
+    <div class='group'> 
+    <h2>Question ${index + 1} of ${store.questions.length}: ${question}</h2>
+    <div>
+    `;
+};
+// /**
+//  * Generates the list of possible answers for
+//  * one question
+//  */
+function generatingAnswers() {
+    let answers = [];
+    let index = 0;
+    let answersHtml = '';
+    answers = store.questions[store.questionNumber].answers;
+    console.log(answers);
+    answers.forEach(function (){
+        answersHtml += `
+        <div>
+            <input type="radio" value="${answers[index]}" name="answers"> 
+            <label for=${answers[index]}" id="radial">${answers[index]}</label>
+        <div>
+        `;
+        index++;
+    });
+    return `
+    <form>
+        ${answersHtml}
+        <button type="submit" id="eval" class="left">Submit</button>
+    </form>
+    `;
 
+};
+/**
+ * Generates the HTML to display one question
+ */
+function displayQuestionAndAnswer() {
+    let htmlQA = generatingQuestion() + generatingAnswers();
+    return htmlQA;
+};
+ /**
+ * Generates the HTML for the eval of question
+ */
+function generatingResults(val) {
+    let answer = val;
+    let correctA = store.questions[store.questionNumber].correctAnswer;
+    if(answer === correctA){
+        store.score++;
+        return `
+        <div>
+            <p class='green'>CORRECT!</p>
+            <p>Score: ${store.score}/${store.questions.length}</p>
+            <button type="button" id="next" class="left">Next</button>
+            </div>
+        `;
+    }else{
+        return `
+            <div>
+        	<p class='red'>Incorrect!</p>
+        	<p>The correct answer is: <span class='bold'>${correctA}</span>.</p>
+        	<button type="button" id="next" class="left">Next</button>
+        	<div>
+        `;
+    };
+
+};
+// this is a test to find out if saving works
+ /**
+ //*- 'correct' / 'incorrect'
+ *  - HTML providing the user with feedback 
+ * regarding whether their answer was correct or incorrect.
+ */
+function finalResults() {
+    return `
+    <div>
+        <p> Quiz has ended!</p>
+        <p> Score: <span class='bold'>${store.score}/${store.questions.length}</span> </p>
+        <button type="button" id="restart">Restart Quiz</button>
+    </div>
+    `;
+};
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
+/**
+/* All-purpose render function that will conditionally 
+ * render the page based upon the state of the STORE.
+ */
+function render() {
+let screen = '';
+if (store.quizStarted === false){
+    $('.body').html(startPageGen());
+    handleStartClick();
+} else if (store.questionNumber >= 0 && store.questionNumber < store.questions.length) {
+    $('.body').html(displayQuestionAndAnswer());
+    handleSubmitEval();  
+}else {
+    $('.body').html(finalResults());
+    handleRestartButtonClick()
+};
+};
+
+
 
 /********** EVENT HANDLER FUNCTIONS **********/
+/**
+ * Handles a click of the quiz's start button
+ */
+function handleStartClick(){
+$('#start').on('click', function(e){
+    e.preventDefault();
+    console.log(e);
+    store.quizStarted = true;
+    render(); 
+    });
+};
+ /**
+ * Handles the submission of the question form
+ */
+function handleSubmitEval() {
+    $('#eval').on('click', function(e){
+        e.preventDefault();
+        let radioValue = $("input[name='answers']:checked").val();
+        $('.body').html(generatingResults(radioValue));
+        store.questionNumber++;
+        handleNextQ();
+        console.log(store.questionNumber);
+    });
+};
+
+ /**
+ * Handles the click of the "next" button
+ */
+function handleNextQ() {
+	$('#next').on('click', function(e) {
+        e.preventDefault();
+		render();
+    });
+};
+ /**
+ * Resets all values to prepare to restart quiz
+ */
+function handleRestartButtonClick() {
+$('#restart').on('click', function() {
+    store.quizStarted = false;
+    store.questionNumber = 0;
+    store.score = 0;
+    render();
+});
+};
 
 // These functions handle events (submit, click, etc)
+function handleQuizApp() {
+    render();
+    handleStartClick();
+    handleSubmitEval();
+    handleNextQ();
+    handleRestartButtonClick();
+};
+
+handleQuizApp();
