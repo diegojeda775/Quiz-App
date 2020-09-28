@@ -46,7 +46,7 @@ h2 {
   padding-left:  20px;
 }
 button, input {
-  margin: 10px;
+  margin: 15px;
 }
 .red{
   color: red;
@@ -73,6 +73,9 @@ button, input {
   }
   p{
     font-size: 30px;
+  }
+  button, input {
+    margin: 10px;
   }
 }
 
