@@ -19,13 +19,13 @@ body {
 
 p {
   color: white;
-  font-size: 30px;
+  font-size: 28px;
 }
 
 header{
   color: white;
   text-align: center;
-  font-size: 42px;
+  font-size: 35px;
 }
 
 form{
@@ -35,7 +35,7 @@ form{
 
 h2 {
   color: white;
-  font-size: 38px;
+  font-size: 30px;
 }
 
 .left{
@@ -62,6 +62,18 @@ button, input {
 }
 .group{
   text-align: center;
+}
+
+@media all and (min-width: 600px) {
+  h2{
+    font-size: 38px;
+  }
+  header{
+    font-size: 42px;
+  }
+  p{
+    font-size: 30px;
+  }
 }
 
 
