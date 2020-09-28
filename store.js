@@ -15,7 +15,7 @@ const store = {
       correctAnswer: 'Ceviche'
     },
     {
-      question: 'What year is the Independance day of Peru?',
+      question: 'What is the year when Peru gained its independance?',
       answers: [
         '1970',
         '1821',
@@ -25,7 +25,7 @@ const store = {
       correctAnswer: '1821'
     },
     {
-      question: 'Which 7th world wonder is locate in Peru?',
+      question: 'Which of the 7 wonders of the world is locate in Peru?',
       answers: [
         'Christ the Redeemer',
         'Taj Mahal',
@@ -35,7 +35,7 @@ const store = {
       correctAnswer: 'Machu Picchu'
     },
     {
-      question: 'How different kinds of potatoes can be found in Peru?',
+      question: 'How many different kinds of potatoes can be found in Peru?',
       answers: [
         'under 100',
         'over 100',

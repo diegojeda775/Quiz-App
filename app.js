@@ -38,7 +38,7 @@ function generatingQuestion() {
     question = store.questions[index].question;
     
     return `
-    <div class='group'> 
+    <div> 
     <h2>Question ${index + 1} of ${store.questions.length}: ${question}</h2>
     <div>
     `;
@@ -63,10 +63,12 @@ function generatingAnswers() {
         index++;
     });
     return `
+    <div>
     <form>
         ${answersHtml}
         <button type="submit" id="eval" class="left">Submit</button>
     </form>
+    </div>
     `;
 
 };
@@ -89,14 +91,24 @@ function generatingResults(val) {
         <div>
             <p class='green'>CORRECT!</p>
             <p>Score: ${store.score}/${store.questions.length}</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br> 
             <button type="button" id="next" class="left">Next</button>
             </div>
         `;
     }else{
         return `
             <div>
-        	<p class='red'>Incorrect!</p>
-        	<p>The correct answer is: <span class='bold'>${correctA}</span>.</p>
+            <p class='red'>INCORRECT!</p>
+            <p>The correct answer is: <span class='bold'>${correctA}</span>.</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br> 
         	<button type="button" id="next" class="left">Next</button>
         	<div>
         `;
@@ -111,7 +123,7 @@ function generatingResults(val) {
  */
 function finalResults() {
     return `
-    <div>
+    <div class='group'>
         <p> Quiz has ended!</p>
         <p> Score: <span class='bold'>${store.score}/${store.questions.length}</span> </p>
         <button type="button" id="restart">Restart Quiz</button>
