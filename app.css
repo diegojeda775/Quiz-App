@@ -25,7 +25,9 @@ p {
 header{
   color: white;
   text-align: center;
-  font-size: 35px;
+  font-size: 32px;
+  margin: 0px;
+  padding: 0px;
 }
 
 form{
@@ -35,7 +37,7 @@ form{
 
 h2 {
   color: white;
-  font-size: 30px;
+  font-size: 28px;
   padding-left: 0px;
 }
 
