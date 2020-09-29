@@ -25,7 +25,7 @@ const store = {
       correctAnswer: '1821'
     },
     {
-      question: 'Which of the 7 wonders of the world is locate in Peru?',
+      question: 'Which of the 7 wonders of the world is located in Peru?',
       answers: [
         'Christ the Redeemer',
         'Taj Mahal',
