@@ -55,12 +55,11 @@ function generatingAnswers() {
     let index = 0;
     let answersHtml = '';
     answers = store.questions[store.questionNumber].answers;
-    //console.log(answers);
+    console.log(answers);
     answers.forEach(function (){
         answersHtml += `
         <div>
-            <input type="radio" value="${answers[index]}" name="answers" required> 
-            <label for=${answers[index]}" id="radial">${answers[index]}</label>
+            <label for="${answers[index]}" id="radial"><input type="radio" value="${answers[index]}" name="answers">${answers[index]}</label>
         <div>
         `;
         index++;
