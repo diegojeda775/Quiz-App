@@ -38,9 +38,12 @@ function generatingQuestion() {
     question = store.questions[index].question;
     
     return `
-    <div> 
-    <h2>Question ${index + 1} of ${store.questions.length}: ${question}</h2>
     <div>
+    <div>
+    <h2 class="group">Score: ${store.score}/${store.questions.length}</h2>
+    </div>
+    <h2>Question ${index + 1} of ${store.questions.length}: ${question}</h2>
+    </div>
     `;
 };
 // /**
@@ -52,11 +55,11 @@ function generatingAnswers() {
     let index = 0;
     let answersHtml = '';
     answers = store.questions[store.questionNumber].answers;
-    console.log(answers);
+    //console.log(answers);
     answers.forEach(function (){
         answersHtml += `
         <div>
-            <input type="radio" value="${answers[index]}" name="answers"> 
+            <input type="radio" value="${answers[index]}" name="answers" required> 
             <label for=${answers[index]}" id="radial">${answers[index]}</label>
         <div>
         `;
@@ -66,7 +69,10 @@ function generatingAnswers() {
     <div>
     <form>
         ${answersHtml}
+        <div class="error"></div>
+        <div>
         <button type="submit" id="eval" class="left">Submit</button>
+        </div>
     </form>
     </div>
     `;
@@ -172,10 +178,18 @@ function handleSubmitEval() {
     $('#eval').on('click', function(e){
         e.preventDefault();
         let radioValue = $("input[name='answers']:checked").val();
-        $('.body').html(generatingResults(radioValue));
-        store.questionNumber++;
-        handleNextQ();
-        console.log(store.questionNumber);
+        let message =  `<p class="red">Please select an answer!</p>`;
+        console.log(radioValue);
+        if(radioValue > ''){
+            $('.body').html(generatingResults(radioValue));
+            store.questionNumber++;
+            handleNextQ();
+       } else {
+           $('.error').html(message);
+        }
+        
+        
+    //console.log(store.questionNumber);
     });
 };
 
