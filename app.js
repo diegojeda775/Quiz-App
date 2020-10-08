@@ -59,7 +59,8 @@ function generatingAnswers() {
     answers.forEach(function (){
         answersHtml += `
         <div>
-            <label for="${answers[index]}" id="radial"><input type="radio" value="${answers[index]}" name="answers">${answers[index]}</label>
+            <input type="radio" value="${answers[index]}" name="answers" id="${answers[index]}">
+            <label for="${answers[index]}" id="radial">${answers[index]}</label>
         <div>
         `;
         index++;
